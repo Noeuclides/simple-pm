@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    title
+      | SimplePm
+
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+    = javascript_pack_tag 'application', 'data-turbo-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbo-track': 'reload'
+    = javascript_include_tag 'https://kit.fontawesome.com/978a9dc156.js', media: 'all', 'data-turbo-track': 'reload'
+  body
+    div.container class="mx-auto pt-5"
+      p.notice
+        = notice
+      p.alert
+        = alert
+      = yield

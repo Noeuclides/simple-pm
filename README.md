@@ -1,0 +1,3 @@
+# Simple PM
+
+Project management with rails, slim, tailwind...

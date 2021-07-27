@@ -1,0 +1,87 @@
+= link_to 'Back', projects_path
+div class="max-w-full rounded overflow-hidden shadow-lg"
+  div class="px-6 py-4"
+    h2 class="flex justify-between font-medium text-3xl my-4"
+      span
+        = @project.name
+      span
+        button class="bg-white text-xl text-gray-800 font-light py-2 px-4 border border-gray-400 rounded shadow"
+          = link_to 'Edit Project', edit_project_path(@project)
+        button class="bg-white text-xl text-gray-800 font-light py-2 px-4 border border-gray-400 rounded shadow"
+          = link_to 'Delete Project', @project, method: :delete, data: { confirm: 'Are you sure?' }
+    p = @project.description
+    p
+      | User:
+      = @project.user_id
+
+    hr
+    h1
+      | New task
+    = form_with(model: [@task.project, @task]) do |f|
+      div class="flex flex-wrap -mx-3 mb-2"
+        - if @task.errors.any?
+          #error_explanation
+            h2
+              = pluralize(@task.errors.count, "error")
+              |  prohibited this task from being saved:
+          ul
+            - @task.errors.full_messages.each do |msg|
+              li
+                = msg
+        div class="w-full md:w-1/3 px-3 mb-6 md:mb-0"
+          .field
+            = f.label :name
+          br
+          = f.text_field :name
+        div class="w-full md:w-1/3 px-3 mb-6 md:mb-0"
+          .field
+            = f.label :description
+          br
+          = f.text_area :description
+        div class="w-full md:w-1/3 px-3 mb-6 md:mb-0"
+          .field
+            = f.label :status
+          br
+          = f.select :status, options_for_select(Task::STATUS_OPTIONS)
+        div class="w-full md:w-1/3 px-3 mb-6 md:mb-0"
+          .actions
+            = f.submit
+    hr
+    h1
+      | Listing tasks
+    table
+      tr
+        th
+          | Name
+        th
+          | Id
+        th
+          | Description
+        th
+          | Status
+        th
+          | Project
+        th
+        th
+        th
+      - Task.joins(:project).all.each do |task|
+          tr
+            td
+              = task.name
+            td
+              = task.id
+            td
+              = task.description
+            td
+              = task.status
+            td
+              = task.project
+            td
+              = link_to 'Show', [task.project, task]
+            td
+              = link_to 'Edit', edit_project_task_path(task.project, task.id)
+            td
+              = link_to 'Destroy', [task.project, task], method: :delete, data: { confirm: 'Are you sure?' }
+
+    br
+    = link_to 'New Task', new_project_task_path(@project.id)
