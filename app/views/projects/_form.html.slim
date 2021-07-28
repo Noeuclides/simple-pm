@@ -10,10 +10,10 @@
         li
           = error.full_message
   .field
-    = form.label :name
-    = form.text_field :name
+    = form.label :name, class:"text-gray-700"
+    = form.text_field :name, class:"form-input mt-1 block w-full", placeholder:"Project name"
   .field
-    = form.label :description
-    = form.text_area :description
+    = form.label :description, class:"text-gray-700"
+    = form.text_area :description, class:"form-textarea mt-1 block w-full", rows:"3", placeholder:"Project description."
   .actions
     = form.submit

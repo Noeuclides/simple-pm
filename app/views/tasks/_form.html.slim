@@ -9,16 +9,13 @@
         li
           = msg
   .field
-    = f.label :name
-  br
-  = f.text_field :name
+    = f.label :name, class:"text-gray-700"
+    = f.text_field :name, class:"form-input mt-1 block w-full", placeholder:"Project name"
   .field
-    = f.label :description
-  br
-  = f.text_area :description
+    = f.label :description, class:"text-gray-700"
+    = f.text_area :description, class:"form-textarea mt-1 block w-full", rows:"3", placeholder:"Project description."
   .field
-    = f.label :status
-  br
-  = f.select :status, options_for_select(Task::STATUS_OPTIONS)
+    = f.label :status, class:"text-gray-700"
+    = f.select :status, options_for_select(Task::STATUS_OPTIONS), {}, class:"form-select mt-1 block w-full"
   .actions
     = f.submit

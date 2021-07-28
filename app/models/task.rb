@@ -8,4 +8,16 @@ class Task < ApplicationRecord
     ['In progress', 'in-progress'],
     %w[Complete complete]
   ]
+
+  def complete?
+    status == 'complete'
+  end
+
+  def in_progress?
+    status == 'in-progress'
+  end
+
+  def not_started?
+    status == 'not-started'
+  end
 end

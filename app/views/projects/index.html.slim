@@ -7,6 +7,12 @@ div class="max-w-full rounded overflow-hidden shadow-lg"
   div class="text-gray-700 text-base"
     - @projects.each do |project|
       = link_to project
+        span class="inline-flex items-center justify-center m-3 px-2 py-1 text-xs font-bold leading-none text-red-100 bg-#{badge_color(project.status)}-600 rounded-full"
+          = project.status
+        span.text-xs
+          small = "#{project.percent_complete}% complete "
+        span.text-xs
+          small = "(#{project.total_complete}/ #{project.total_tasks} tasks)"
         div class="max-w-full rounded border-2 overflow-hidden m-3 pl-5"
           div class="font-semibold text-2xl my-4"
             = project.name
