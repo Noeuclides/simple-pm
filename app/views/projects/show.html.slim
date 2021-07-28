@@ -41,17 +41,19 @@ div class="max-w-full rounded overflow-hidden shadow-lg"
     hr
     h1 class="font-medium text-2xl my-5"
       | Listing tasks
-    - @project.tasks.joins(:project).all.each do |task|
-      div class="max-w-full rounded overflow-hidden shadow-lg border my-5"
-        div class="flex justify-between font-medium text-3xl my-4"
-          div class="flex flex-wrap content-center font-medium text-base mx-4 px-5 h-40 py-auto"
-            div
-              div class="inline-flex items-center justify-center my-4 px-2 py-1 text-xs font-bold leading-none text-red-100 bg-#{badge_color(task.status)}-600 rounded-full"
-                = task.status
-              div class="font-semibold text-lg my-auto"
-                = task.name
-              div class="my-3"
-                = task.description
-          div class="flex flex-wrap content-center w-full md:w-1/3 px-3 mb-6 md:mb-0"
-            = link_to 'Edit', edit_project_task_path(task.project, task.id), class: "w-36 bg-white text-sm text-gray-800 font-light mr-2 py-2 px-4 border border-gray-400 rounded shadow"
-            = link_to 'Destroy', [task.project, task], method: :delete, data: { confirm: 'Are you sure?' }, class: "w-36 bg-white text-sm text-gray-800 font-light mr-2 py-2 px-4 border border-gray-400 rounded shadow"
+    ul#tasks-list
+      - @project.tasks.joins(:project).all.each do |task|
+        li class="cursor-grab active:cursor-grabbing"
+          div class="max-w-full rounded overflow-hidden shadow-lg border my-5"
+            div class="flex justify-between font-medium text-3xl my-4"
+              div class="flex flex-wrap content-center font-medium text-base mx-4 px-5 h-40 py-auto md:w-2/3"
+                div
+                  div class="inline-flex items-center justify-center my-4 px-2 py-1 text-xs font-bold leading-none text-red-100 bg-#{badge_color(task.status)}-600 rounded-full"
+                    = task.status
+                  div class="font-semibold text-lg my-auto"
+                    = task.name
+                  div class="my-3 h-24 overflow-ellipsis overflow-hidden"
+                    = task.description
+              div class="flex flex-wrap content-center w-full md:w-1/3 px-3 mb-6 md:mb-0"
+                = link_to 'Edit', edit_project_task_path(task.project, task.id), class: "w-36 bg-white text-sm text-gray-800 font-light mr-2 py-2 px-4 border border-gray-400 rounded shadow"
+                = link_to 'Destroy', [task.project, task], method: :delete, data: { confirm: 'Are you sure?' }, class: "w-36 bg-white text-sm text-gray-800 font-light mr-2 py-2 px-4 border border-gray-400 rounded shadow"

@@ -4,17 +4,29 @@
 // that code so it'll be compiled.
 
 import Rails from "@rails/ujs"
-Rails.start()
-import "@hotwired/turbo-rails"
-ActiveStorage.start()
+import {Turbo} from "@hotwired/turbo-rails"
+
+window.Turbo = Turbo
+import * as ActiveStorage from "@rails/activestorage"
 import "channels"
 import "chartkick"
 import "chart.js"
 import "choices.js"
 import "alpinejs"
+import Sortable from 'sortablejs'
+// ActiveStorage.start()
+Rails.start()
+
 
 import debounced from 'debounced'
+
 debounced.initialize()
 
 // import "/controllers"
 import "../css/application.css"
+
+window.addEventListener('turbo:load', () => {
+    console.log("Sortable: ", Sortable);
+    const el = document.querySelector("#tasks-list");
+    const sortable = Sortable.create(el, { animation: 150 });
+})

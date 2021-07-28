@@ -45,10 +45,6 @@ module.exports = {
                     '500': '#565656',
                     '600': '#048780'
                 },
-                cheep: {
-                    '100': '#3490dc',
-                    '200': '#ffed4a'
-                },
                 symplifica: {
                     light: '#1beae4',
                     dark: '#00838C',
@@ -96,6 +92,16 @@ module.exports = {
                 none: 'none',
             },
         },
+        cursor: {
+            grab: 'grab',
+            grabbing: 'grabbing',
+        },
+
+    },
+    variants: {
+        extend: {
+            cursor: ['active']
+        }
     },
     plugins: [
         require('@tailwindcss/forms'),
