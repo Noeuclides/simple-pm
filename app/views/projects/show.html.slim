@@ -1,24 +1,28 @@
-= link_to 'Back', projects_path
+= link_to projects_path, class: "text-2xl" do
+  i class="fas fa-chevron-left text-xl"
+    |  Back
+
 div class="max-w-full rounded overflow-hidden shadow-lg"
-  div class="px-6 py-4"
-    h2 class="flex justify-between font-medium text-3xl my-4"
-      span
+  div class="px-20 py-10"
+    div class="flex justify-between font-medium text-3xl my-4"
+      div.my-2
         = @project.name
-      span
-        button class="bg-white text-xl text-gray-800 font-light py-2 px-4 border border-gray-400 rounded shadow"
+        p.my-3
+          |  By:
+          = @project.user_id
+      div
+        button class="w-36 bg-white text-sm text-gray-800 font-light mr-2 py-2 px-4 border border-gray-400 rounded shadow"
           = link_to 'Edit Project', edit_project_path(@project)
-        button class="bg-white text-xl text-gray-800 font-light py-2 px-4 border border-gray-400 rounded shadow"
+        button class="w-36 bg-white text-sm text-gray-800 font-light py-2 px-4 border border-gray-400 rounded shadow"
           = link_to 'Delete Project', @project, method: :delete, data: { confirm: 'Are you sure?' }
-    p = @project.description
-    p
-      | User:
-      = @project.user_id
+    p class="my-4 text-base"
+      = @project.description
 
     hr
-    h1
+    h1 class="font-medium text-2xl my-5"
       | New task
     = form_with(model: [@task.project, @task]) do |f|
-      div class="flex flex-wrap -mx-3 mb-2"
+      div class="flex flex-wrap my-4"
         - if @task.errors.any?
           #error_explanation
             h2
@@ -28,60 +32,27 @@ div class="max-w-full rounded overflow-hidden shadow-lg"
             - @task.errors.full_messages.each do |msg|
               li
                 = msg
-        div class="w-full md:w-1/3 px-3 mb-6 md:mb-0"
-          .field
-            = f.label :name
-          br
-          = f.text_field :name
-        div class="w-full md:w-1/3 px-3 mb-6 md:mb-0"
-          .field
-            = f.label :description
-          br
-          = f.text_area :description
-        div class="w-full md:w-1/3 px-3 mb-6 md:mb-0"
-          .field
-            = f.label :status
-          br
+        div class="w-full md:w-1/2 mb-6 md:mb-0"
+          = f.text_field :name, placeholder: "Enter task name...", class: "block w-full text-xs"
+        div class="flex justify-center w-full md:w-1/4 mb-6 md:mb-0"
           = f.select :status, options_for_select(Task::STATUS_OPTIONS)
-        div class="w-full md:w-1/3 px-3 mb-6 md:mb-0"
+        button class="w-full md:w-1/4 mb-6 md:mb-0"
           .actions
             = f.submit
     hr
-    h1
+    h1 class="font-medium text-2xl my-5"
       | Listing tasks
-    table
-      tr
-        th
-          | Name
-        th
-          | Id
-        th
-          | Description
-        th
-          | Status
-        th
-          | Project
-        th
-        th
-        th
-      - Task.joins(:project).all.each do |task|
-          tr
-            td
-              = task.name
-            td
-              = task.id
-            td
-              = task.description
-            td
-              = task.status
-            td
-              = task.project
-            td
-              = link_to 'Show', [task.project, task]
-            td
-              = link_to 'Edit', edit_project_task_path(task.project, task.id)
-            td
-              = link_to 'Destroy', [task.project, task], method: :delete, data: { confirm: 'Are you sure?' }
-
-    br
-    = link_to 'New Task', new_project_task_path(@project.id)
+    - Task.joins(:project).all.each do |task|
+      div class="max-w-full rounded overflow-hidden shadow-lg border my-5"
+        div class="flex justify-between font-medium text-3xl my-4"
+          div class="flex flex-wrap content-center font-medium text-base mx-4 px-5 h-40 py-auto"
+            div
+              div class="font-semibold text-lg my-auto"
+                = task.name
+              div class="my-3"
+                = task.description
+              div class="text-sm my-3"
+                = task.status
+          div class="flex flex-wrap content-center w-full md:w-1/3 px-3 mb-6 md:mb-0"
+            = link_to 'Edit', edit_project_task_path(task.project, task.id), class: "w-36 bg-white text-sm text-gray-800 font-light mr-2 py-2 px-4 border border-gray-400 rounded shadow"
+            = link_to 'Destroy', [task.project, task], method: :delete, data: { confirm: 'Are you sure?' }, class: "w-36 bg-white text-sm text-gray-800 font-light mr-2 py-2 px-4 border border-gray-400 rounded shadow"
