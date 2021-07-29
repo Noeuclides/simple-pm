@@ -30,3 +30,4 @@ window.addEventListener('turbo:load', () => {
     const el = document.querySelector("#tasks-list");
     const sortable = Sortable.create(el, { animation: 150 });
 })
+import "controllers"

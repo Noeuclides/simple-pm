@@ -54,6 +54,8 @@ div class="max-w-full rounded overflow-hidden shadow-lg"
                     = task.name
                   div class="my-3 h-24 overflow-ellipsis overflow-hidden"
                     = task.description
-              div class="flex flex-wrap content-center w-full md:w-1/3 px-3 mb-6 md:mb-0"
+              div class="flex flex-wrap content-center w-full md:w-1/3 px-3 msb-6 md:mb-0"
+                = select_tag task.id, options_for_select(Task::STATUS_OPTIONS.each { |status| [status[1], status[0]] }, task.status), class: "inline.mt-1 shadow-md block w-full px-4 py-3 pr-10 text-base text-gray-500 font-bold border-0 sm:text-sm focus:border-gray-50 hover:shadow-lg focus:shadow-lg dropdown",
+                        data: { reflex: "change->StatusReflex#change", id: task.id, status: task.status }
                 = link_to 'Edit', edit_project_task_path(task.project, task.id), class: "w-36 bg-white text-sm text-gray-800 font-light mr-2 py-2 px-4 border border-gray-400 rounded shadow"
                 = link_to 'Destroy', [task.project, task], method: :delete, data: { confirm: 'Are you sure?' }, class: "w-36 bg-white text-sm text-gray-800 font-light mr-2 py-2 px-4 border border-gray-400 rounded shadow"
