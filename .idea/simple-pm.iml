@@ -109,6 +109,7 @@
     <orderEntry type="library" scope="PROVIDED" name="turbolinks (v5.2.1, rbenv: 3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="turbolinks-source (v5.2.0, rbenv: 3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v2.0.4, rbenv: 3.0.1) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="view_component (v2.36.0, rbenv: 3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="warden (v1.2.9, rbenv: 3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="web-console (v4.1.0, rbenv: 3.0.1) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="webdrivers (v4.6.0, rbenv: 3.0.1) [gem]" level="application" />
@@ -131,12 +132,15 @@
         <option value="assets" />
         <option value="benchmark" />
         <option value="channel" />
+        <option value="component" />
         <option value="controller" />
         <option value="devise" />
         <option value="devise:controllers" />
         <option value="devise:install" />
         <option value="devise:views" />
+        <option value="erb:component" />
         <option value="generator" />
+        <option value="haml:component" />
         <option value="helper" />
         <option value="integration_test" />
         <option value="jbuilder" />
@@ -155,17 +159,21 @@
         <option value="nested_scaffold:nested_scaffold" />
         <option value="nested_scaffold:scaffold:test_unit" />
         <option value="nested_scaffold:scaffold_controller" />
+        <option value="preview:component" />
         <option value="rack_profiler:install" />
         <option value="resource" />
         <option value="responders:install" />
         <option value="responders_controller" />
+        <option value="rspec:component" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
+        <option value="slim:component" />
         <option value="stimulus_reflex" />
         <option value="stimulus_reflex:config" />
         <option value="system_test" />
         <option value="task" />
         <option value="test_unit:channel" />
+        <option value="test_unit:component" />
         <option value="test_unit:generator" />
         <option value="test_unit:install" />
         <option value="test_unit:mailbox" />
@@ -180,12 +188,15 @@
         <option value="assets" />
         <option value="benchmark" />
         <option value="channel" />
+        <option value="component" />
         <option value="controller" />
         <option value="devise" />
         <option value="devise:controllers" />
         <option value="devise:install" />
         <option value="devise:views" />
+        <option value="erb:component" />
         <option value="generator" />
+        <option value="haml:component" />
         <option value="helper" />
         <option value="integration_test" />
         <option value="jbuilder" />
@@ -204,17 +215,21 @@
         <option value="nested_scaffold:nested_scaffold" />
         <option value="nested_scaffold:scaffold:test_unit" />
         <option value="nested_scaffold:scaffold_controller" />
+        <option value="preview:component" />
         <option value="rack_profiler:install" />
         <option value="resource" />
         <option value="responders:install" />
         <option value="responders_controller" />
+        <option value="rspec:component" />
         <option value="scaffold" />
         <option value="scaffold_controller" />
+        <option value="slim:component" />
         <option value="stimulus_reflex" />
         <option value="stimulus_reflex:config" />
         <option value="system_test" />
         <option value="task" />
         <option value="test_unit:channel" />
+        <option value="test_unit:component" />
         <option value="test_unit:generator" />
         <option value="test_unit:install" />
         <option value="test_unit:mailbox" />

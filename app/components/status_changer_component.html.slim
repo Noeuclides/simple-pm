@@ -1,0 +1,2 @@
+= select_tag task_id, options_for_select(status_options.map { |state| [state.readable, state.slugged] }, status), class: "inline.mt-1 shadow-md block w-full px-4 py-3 pr-10 text-base text-gray-500 font-bold border-0 sm:text-sm focus:border-gray-50 hover:shadow-lg focus:shadow-lg dropdown",
+        data: { reflex: "change->StatusReflex#change", id: task_id }
