@@ -1,9 +1,9 @@
 = link_to project
   div class="max-w-full h-36 rounded border-2 overflow-hidden m-3 px-14 py-5"
-    = render(ProgressBadgeComponent.new(status: project.status))
+    = render(ProgressBadgeComponent.new(status: status))
     span.text-xs
       small = completion_stats
     div class="font-semibold text-2xl my-4"
-      = project.name
+      = name
     div class="font-medium text-xl my-4"
-      = project.description
+      = description

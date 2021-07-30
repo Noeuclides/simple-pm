@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ProjectOverviewComponent < ViewComponent::Base
+  extend Forwardable
+  delegate [:name, :description, :status, :percent_complete, :total_complete, :total_tasks] => :@project
   attr_reader :project
   with_collection_parameter :project
 
@@ -13,12 +15,12 @@ class ProjectOverviewComponent < ViewComponent::Base
   end
 
   private
+
   def display_percent_complete
-    "#{project.percent_complete} % complete"
+    "#{percent_complete} % complete"
   end
 
   def display_breakdown
-    "(#{project.total_complete} / #{project.total_tasks} tasks)"
+    "(#{total_complete} / #{total_tasks} tasks)"
   end
-
 end
