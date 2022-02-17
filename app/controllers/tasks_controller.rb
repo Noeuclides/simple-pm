@@ -24,7 +24,12 @@ class TasksController < ApplicationController
   # POST projects/1/tasks
   def create
     @task = @project.tasks.build(task_params)
-
+    byebug
+    WebNotificationsChannel.broadcast_to(
+      current_user,
+      title: 'New things!',
+      body: 'All the news fit to print'
+    )
     if @task.save
       redirect_to(@task.project)
     else
@@ -60,6 +65,6 @@ class TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:name, :description, :status, :project_id)
+      params.require(:task).permit(:name, :description, :status, :project_id, :user_id)
     end
 end

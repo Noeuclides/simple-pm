@@ -1,6 +1,35 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id          :integer          not null, primary key
+#  description :text
+#  name        :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :integer          not null
+#
+# Indexes
+#
+#  index_projects_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  user_id  (user_id => users.id)
+#
+
 class Project < ApplicationRecord
   has_many :tasks
   belongs_to :user
+
+  after_create_commit :notify_recipient
+
+  private
+
+  def notify_recipient
+    byebug
+    ProjectNotification.with(project: self).deliver(user)
+  end
 
   def status
     return 'not-started' if tasks.none?

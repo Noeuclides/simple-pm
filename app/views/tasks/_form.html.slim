@@ -17,5 +17,8 @@
   .field
     = f.label :status, class:"text-gray-700"
     = f.select :status, options_for_select(Task::STATUS_OPTIONS), {}, class:"form-select mt-1 block w-full"
+  .field
+    = f.label :user_id, class: "text-gray-700"
+    = f.select :user_id, options_for_select(User.all.map {|u| [u.email, u.id]}), {}, class: "form-select mt-1 block w-full"
   .actions
     = f.submit
