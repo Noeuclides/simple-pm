@@ -26,7 +26,7 @@ class TasksController < ApplicationController
     @task = @project.tasks.build(task_params)
     byebug
     WebNotificationsChannel.broadcast_to(
-      current_user,
+      'web_notifications_channel',
       title: 'New things!',
       body: 'All the news fit to print'
     )
@@ -39,7 +39,7 @@ class TasksController < ApplicationController
 
   # PUT projects/1/tasks/1
   def update
-    if @task.update(task_params)
+    if @task.update(task_params.merge(status: params[:task][:status].to_i))
       redirect_to(@task.project)
     else
       render action: 'edit'
@@ -65,6 +65,6 @@ class TasksController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def task_params
-      params.require(:task).permit(:name, :description, :status, :project_id, :user_id)
+      params.require(:task).permit(:name, :description, :project_id, :user_id)
     end
 end

@@ -23,7 +23,11 @@ class ProjectsController < ApplicationController
 
   # POST /projects or /projects.json
   def create
-    @project = current_user.projects.build(project_params)
+    team = Team.create!(name: params[:project][:team_name])
+    User.find(params[:project][:team_members]).each do |user|
+      UserTeam.create!(user: user, team: team)
+    end
+    @project = current_user.projects.build(project_params.merge(team_id:team.id))
 
     respond_to do |format|
       if @project.save
@@ -66,6 +70,6 @@ class ProjectsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def project_params
-      params.require(:project).permit(:name, :description)
+      params.require(:project).permit(:name, :description, :team_id)
     end
 end

@@ -8,9 +8,4 @@ class StatusChangerComponent < ViewComponent::Base
     @status = status
   end
 
-  def status_options
-    Task::STATUS_OPTIONS.map do |option|
-      Struct.new(:readable, :slugged).new(*option)
-    end
-  end
 end

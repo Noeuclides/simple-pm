@@ -8,6 +8,8 @@ li class="cursor-grab active:cursor-grabbing task-item" data-task-id=id
             = name
           div class="my-3 h-14 overflow-ellipsis overflow-hidden"
             = description
+          div class="my-3 h-14 overflow-ellipsis overflow-hidden"
+            = user.email
       div class="flex flex-wrap content-center w-full md:w-1/3 px-3 msb-6 md:mb-0"
         = render StatusChangerComponent.new(task_id: id, status: status)
         = link_to 'Edit', edit_project_task_path(project, id), class: "w-36 bg-white text-sm text-gray-800 font-light mr-2 py-2 px-4 border border-gray-400 rounded shadow"

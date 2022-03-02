@@ -15,5 +15,7 @@
   .field
     = form.label :description, class:"text-gray-700"
     = form.text_area :description, class:"form-textarea mt-1 block w-full", rows:"3", placeholder:"Project description."
+    = form.text_field :team_name, class:"form-input mt-1 block w-full", placeholder:"team name"
+    = form.select :team_members, User.team_member.map {|u| [u.email, u.id]},{ include_blank: false, include_hidden: false}, multiple: true
   .actions
     = form.submit

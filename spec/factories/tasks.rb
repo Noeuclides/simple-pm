@@ -5,12 +5,12 @@
 #  id          :integer          not null, primary key
 #  description :text
 #  name        :string
-#  position    :integer
-#  status      :string
+#  position    :integer          default(0), not null
+#  status      :integer          not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  project_id  :integer          not null
-#  user_id     :integer
+#  user_id     :integer          not null
 #
 # Indexes
 #
@@ -20,6 +20,7 @@
 # Foreign Keys
 #
 #  project_id  (project_id => projects.id)
+#  user_id     (user_id => users.id)
 #
 FactoryBot.define do
   factory :task do

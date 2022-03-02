@@ -3,7 +3,7 @@
 class StatusReflex < ApplicationReflex
   def change
     task = Task.find(element.dataset[:id])
-    task.update(status: element[:value])
+    task.update(status: element[:value].to_i)
   end
 
 end

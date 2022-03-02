@@ -2,7 +2,7 @@
 
 class TaskComponent < ViewComponent::Base
   extend Forwardable
-  delegate [:id, :name, :description, :status, :project] => :@task
+  delegate [:id, :name, :description, :status, :project, :user] => :@task
   attr_reader :task
 
   def initialize(task:)

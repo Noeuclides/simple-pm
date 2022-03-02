@@ -9,7 +9,7 @@ div class="max-w-full rounded overflow-hidden shadow-lg"
         = @project.name
         p.my-3
           |  By:
-          = @project.user_id
+          = @project.owner.email
       div
         button class="w-36 bg-white text-sm text-gray-800 font-light mr-2 py-2 px-4 border border-gray-400 rounded shadow"
           = link_to 'Edit Project', edit_project_path(@project)
@@ -21,7 +21,7 @@ div class="max-w-full rounded overflow-hidden shadow-lg"
     hr
     h1 class="font-medium text-2xl my-5"
       | New task
-    = form_with(model: [@task.project, @task]) do |f|
+    = form_with(model: [@task.project, @task], method: :post) do |f|
       div class="flex flex-wrap my-4"
         - if @task.errors.any?
           #error_explanation
@@ -32,12 +32,13 @@ div class="max-w-full rounded overflow-hidden shadow-lg"
             - @task.errors.full_messages.each do |msg|
               li
                 = msg
-        = f.hidden_field :status, value: "not-started"
+        = f.hidden_field :status, value: :not_started
         div class="w-full md:w-1/2 mb-6 md:mb-0"
           = f.text_field :name, placeholder: "Enter task name...", class: "block w-full text-xs"
-        button class="w-full md:w-1/4 mb-6 md:mb-0"
-          .actions
-            = f.submit
+        div class="w-full md:w-1/4 mb-6 md:mb-0 pl-5"
+          = f.select :user_id, options_for_select(@project.team.members.map { |u| [u.email, u.id] }), {}, class: "block w-full text-xs"
+        button class="w-full md:w-1/4 mb-6 md:mb-0 cursor-pointer"
+          = f.submit :create_task, class: "w-36 bg-white text-sm text-gray-800 font-light mr-2 py-2 px-4 border border-gray-400 rounded shadow cursor-pointer"
     hr
     h1 class="font-medium text-2xl my-5"
       | Listing tasks

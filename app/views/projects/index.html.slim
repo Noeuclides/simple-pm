@@ -4,5 +4,7 @@ div class="max-w-full rounded overflow-hidden shadow-lg"
       span Projects
       button class="bg-white text-xl text-gray-800 font-light py-2 px-4 border border-gray-400 rounded shadow"
         = link_to 'New Project', new_project_path
+  div class="text-green-700 text-base"
+    = notice
   div class="text-gray-700 text-base"
     = render(ProjectOverviewComponent.with_collection(@projects))
