@@ -7,38 +7,41 @@
 #  name        :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  user_id     :integer          not null
+#  owner_id    :integer
+#  team_id     :integer          not null
 #
 # Indexes
 #
-#  index_projects_on_user_id  (user_id)
+#  index_projects_on_owner_id  (owner_id)
+#  index_projects_on_team_id   (team_id)
 #
 # Foreign Keys
 #
-#  user_id  (user_id => users.id)
+#  owner_id  (owner_id => users.id)
+#  team_id   (team_id => teams.id)
 #
 
 class Project < ApplicationRecord
-  has_many :tasks
-  belongs_to :user
+  belongs_to :owner, class_name: User.name, dependent: :destroy
+  belongs_to :team, dependent: :destroy
+  has_many :tasks, dependent: :destroy
 
   after_create_commit :notify_recipient
 
   private
 
   def notify_recipient
-    byebug
-    ProjectNotification.with(project: self).deliver(user)
+    ProjectNotification.with(project: self).deliver(team.members)
   end
 
   def status
-    return 'not-started' if tasks.none?
+    return 'not_started' if tasks.none?
     if tasks.all? { |task| task.complete? }
       'complete'
     elsif tasks.any? { |task| task.in_progress? || task.complete? }
-      'in-progress'
+      'in_progress'
     else
-      'not-started'
+      'not_started'
     end
   end
 
